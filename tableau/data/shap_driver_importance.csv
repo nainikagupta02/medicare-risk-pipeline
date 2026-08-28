@@ -1,0 +1,28 @@
+feature,mean_abs_shap,driver
+carrier_claims,0.35817105,Prior-year specialist/physician visits
+carrier_paid,0.35088456,Prior-year physician/specialist spending
+outpatient_visits,0.12581263,Prior-year outpatient visits
+inpatient_paid,0.09352206,Prior-year hospital spending
+outpatient_paid,0.08941582,Prior-year outpatient spending
+has_chf,0.055785306,Congestive heart failure
+rx_patient_paid,0.038645074,Prior-year out-of-pocket Rx spending
+has_copd,0.037011296,COPD
+inpatient_admits,0.036924772,Prior-year hospital admissions
+has_ckd,0.028485134,Chronic kidney disease
+has_ihd,0.02706785,Ischemic heart disease
+rx_fill_count,0.0248847,Prior-year prescription fills
+age,0.024502503,Age
+rx_total_cost,0.018597158,Prior-year prescription spending
+has_alzheimers,0.0145582305,Alzheimer's / dementia
+has_diabetes,0.009222299,Diabetes
+other_payer_paid,0.009133402,Spending covered by another insurer
+has_esrd,0.005575541,End-stage renal disease
+has_ra_oa,0.003242966,Rheumatoid / osteoarthritis
+has_depression,0.002158541,Depression
+has_osteoporosis,0.001903544,Osteoporosis
+race_black,0.0011220875,Race: Black
+has_cancer,0.0010407852,Cancer
+is_male,0.00076282007,Sex: male
+race_hispanic,0.00051984895,Race: Hispanic
+has_stroke_tia,0.00013871319,Stroke / TIA
+race_other,0.0,Race: other

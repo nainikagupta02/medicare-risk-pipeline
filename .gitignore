@@ -1,0 +1,34 @@
+# data
+data/raw/*
+data/interim/*
+data/processed/*
+!data/raw/.gitkeep
+!data/interim/.gitkeep
+!data/processed/.gitkeep
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+.ipynb_checkpoints/
+
+# env / secrets
+.env
+*.env.local
+
+# os
+.DS_Store
+
+# reports
+reports/figures/*
+!reports/figures/.gitkeep
+
+# models
+*.pkl
+*.joblib
+
+# fhir export output (52k+ resources, regenerable via fhir/export_fhir_risk_assessments.py)
+fhir/output/*
+!fhir/output/.gitkeep

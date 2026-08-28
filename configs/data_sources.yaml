@@ -1,0 +1,33 @@
+# CMS DE-SynPUF sample source: https://www.cms.gov/data-research/statistics-trends-reports/medicare-claims-synthetic-public-use-files
+# Download the sample (Sample 1) files below into data/raw/ before running the ETL.
+
+raw_dir: data/raw
+interim_dir: data/interim
+processed_dir: data/processed
+
+files:
+  # beneficiary summary is split by year on purpose: one beneficiary has one
+  # row per year, and chronic condition / coverage fields can change year to
+  # year, so each year needs to stay in its own table.
+  beneficiary_summary_2008:
+    pattern: "DE1_0_2008_Beneficiary_Summary_File_Sample_1.csv"
+  beneficiary_summary_2009:
+    pattern: "DE1_0_2009_Beneficiary_Summary_File_Sample_1.csv"
+  beneficiary_summary_2010:
+    pattern: "DE1_0_2010_Beneficiary_Summary_File_Sample_1.csv"
+  inpatient_claims:
+    pattern: "DE1_0_2008_to_2010_Inpatient_Claims_Sample_1.csv"
+  outpatient_claims:
+    pattern: "DE1_0_2008_to_2010_Outpatient_Claims_Sample_1.csv"
+  carrier_claims:
+    pattern: "DE1_0_2008_to_2010_Carrier_Claims_Sample_1*.csv"
+  prescription_drug_events:
+    pattern: "DE1_0_2008_to_2010_Prescription_Drug_Events_Sample_1.csv"
+
+study_period:
+  start: "2008-01-01"
+  end: "2010-12-31"
+  # first two years used to build features, final year used to define the
+  # high-cost/high-utilization label
+  feature_window_years: [2008, 2009]
+  label_window_year: 2010

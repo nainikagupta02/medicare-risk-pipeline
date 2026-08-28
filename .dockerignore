@@ -1,0 +1,19 @@
+# raw/intermediate data is large (~2GB) and shouldn't be baked into the
+# image -- mount data/ as a volume instead (see README)
+data/raw/*
+data/interim/*
+data/processed/*
+!data/raw/.gitkeep
+!data/interim/.gitkeep
+!data/processed/.gitkeep
+
+reports/figures/*
+!reports/figures/.gitkeep
+
+.venv/
+venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.git/
+.DS_Store

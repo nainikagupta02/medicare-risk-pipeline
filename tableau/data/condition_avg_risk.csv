@@ -1,0 +1,13 @@
+condition,avg_risk_with_condition,avg_risk_without_condition,members_with_condition
+End-stage renal disease,0.6045933,0.40632161,5870
+COPD,0.59568375,0.39038387,9735
+Chronic kidney disease,0.59303254,0.37477884,12902
+Stroke / TIA,0.5862426,0.4180725,3261
+Cancer,0.5794693,0.41230384,5088
+Rheumatoid / osteoarthritis,0.5755349,0.38923874,11050
+Congestive heart failure,0.56235284,0.33827433,21099
+Alzheimer's / dementia,0.556802,0.38059923,14251
+Diabetes,0.5553605,0.30594987,25744
+Depression,0.55429536,0.37839416,14932
+Osteoporosis,0.5474856,0.3940017,11787
+Ischemic heart disease,0.5418683,0.28646135,29136

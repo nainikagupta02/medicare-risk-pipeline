@@ -1,0 +1,54 @@
+random_seed: 42
+
+label:
+  # member is "high-cost" if label_window total allowed spend is above this
+  # percentile of the cohort distribution
+  high_cost_percentile: 0.90
+  # member is "high-utilization" if inpatient admits + ER visits in the
+  # label window meet or exceed this count
+  high_utilization_admit_threshold: 2
+
+split:
+  test_size: 0.2
+  stratify: true
+
+logistic_regression:
+  penalty: l2
+  C: 1.0
+  max_iter: 1000
+  class_weight: balanced
+
+xgboost:
+  # upper bound on boosting rounds, not the final count -- notebook 05 uses
+  # early stopping (a held-out slice of the training partition) to pick the
+  # actual round count, since an ablation showed excess tree capacity, not
+  # missing regularization, was the main driver of train/test overfitting
+  n_estimators: 300
+  max_depth: 4
+  learning_rate: 0.05
+  subsample: 0.8
+  colsample_bytree: 0.8
+  eval_metric: auc
+
+lightgbm:
+  n_estimators: 300  # upper bound; see xgboost's comment above
+  max_depth: 4
+  # lightgbm does NOT derive num_leaves from max_depth the way xgboost caps
+  # leaves by depth -- its default (31) is unconstrained by max_depth=4 and
+  # let each tree overfit far more aggressively than intended (early
+  # stopping collapsed to 1 round before this was set). 15 = 2^4 - 1, the
+  # standard "consistent with max_depth=4" choice.
+  num_leaves: 15
+  learning_rate: 0.05
+  subsample: 0.8
+  colsample_bytree: 0.8
+
+arima:
+  seasonal: true
+  m: 12
+  max_p: 3
+  max_q: 3
+  max_d: 2
+
+forecast:
+  horizon_months: 6
