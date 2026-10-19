@@ -1,5 +1,7 @@
 # Tableau Build Guide
 
+**Live dashboard:** https://public.tableau.com/app/profile/nainika.gupta/viz/MedicareMemberRiskStratification/Story1
+
 Mirrors `dashboard/app.py`'s 4-page structure. Each section names the sheet
 to build, which fields go on which shelf, and any calculated fields or
 parameters needed. Built for **Tableau Public** (free) or Tableau Desktop —
