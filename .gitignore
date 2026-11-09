@@ -32,3 +32,7 @@ reports/figures/*
 # fhir export output (52k+ resources, regenerable via fhir/export_fhir_risk_assessments.py)
 fhir/output/*
 !fhir/output/.gitkeep
+
+# mlflow local tracking store -- regenerable by re-running notebook 05,
+# and duplicates model artifacts already saved under data/processed/models/
+mlruns/

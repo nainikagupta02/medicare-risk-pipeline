@@ -43,6 +43,15 @@ lightgbm:
   subsample: 0.8
   colsample_bytree: 0.8
 
+random_forest:
+  # bagged trees averaged together, not boosted round by round -- no
+  # early-stopping concept applies the way it does for xgboost/lightgbm.
+  # oob_score gives a free validation estimate instead (see notebook 05)
+  n_estimators: 300
+  max_depth: 4
+  min_samples_leaf: 5
+  class_weight: balanced
+
 arima:
   seasonal: true
   m: 12
