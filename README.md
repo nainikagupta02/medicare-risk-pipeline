@@ -112,6 +112,25 @@ justifies building a model instead of just sorting by last year's bill. Lift
 narrows at larger capacities (~1.2x vs. prior-spend at 10%), as expected —
 targeting matters most when capacity is scarce.
 
+## Experiment tracking: MLflow
+
+Every model-training run in notebook 05 logs to a local MLflow experiment
+(`mlflow.set_tracking_uri("file:../mlruns")` — no tracking server needed):
+hyperparameters, test-set AUC/AP/Brier, 5-fold CV AUC/AP (mean ± std), and
+the train/test AUC gap, plus the fitted model artifact itself. The XGBoost
+run additionally gets a SHAP summary plot logged as an artifact, so a
+reviewer can see *why* a run performed the way it did without leaving
+MLflow. After all three runs, the notebook compares them by `cv_auc_mean`
+(the number this project established as the one actually worth trusting,
+not a single train/test split) and registers the winner —
+**XGBoost, 0.7156 CV AUC** — as version 1 of `medicare_high_cost_classifier`
+in the MLflow Model Registry.
+
+View it with `mlflow ui` from the project root, then open
+`http://127.0.0.1:5000`. `mlruns/` is gitignored (regenerable by re-running
+notebook 05, and it duplicates model artifacts already saved under
+`data/processed/models/`).
+
 ## Fairness and subgroup analysis
 
 `high_cost` is a proxy for health need — it's *spend*, not illness itself. A
@@ -215,13 +234,13 @@ pre-computed artifacts from `data/processed/` (no live model inference):
 Run with `python dashboard/app.py` after the notebooks have populated
 `data/processed/`.
 
-**Tableau alternative:** `tableau/` has a `export_for_tableau.py` script
-(produces 5 Tableau-friendly CSVs from the same pipeline outputs) and a
-`BUILD_GUIDE.md` walking through building the same 4-page dashboard in
-Tableau Public/Desktop — sheet by sheet, field by field, with the exact
-calculated fields and parameter setup needed. Tableau workbooks are
-GUI-authored, not scriptable, so that guide is meant to be followed by hand
-rather than run.
+**Tableau alternative:** [live on Tableau Public](https://public.tableau.com/app/profile/nainika.gupta/viz/MedicareMemberRiskStratification/Story1).
+`tableau/` has a `export_for_tableau.py` script (produces 5 Tableau-friendly
+CSVs from the same pipeline outputs) and a `BUILD_GUIDE.md` walking through
+building the same 4-page dashboard in Tableau Public/Desktop — sheet by
+sheet, field by field, with the exact calculated fields and parameter setup
+needed. Tableau workbooks are GUI-authored, not scriptable, so that guide is
+meant to be followed by hand rather than run.
 
 ## Interoperability: FHIR export
 
@@ -468,6 +487,18 @@ where the real signal lives.
   anywhere outside the notebook yet.
 - Verify the Dockerfile builds/runs on Windows and Linux hosts — already
   build-tested on macOS + Apple Silicon (see **Docker**), those two are not.
+- **Cloud-based deployment.** Everything here runs locally today — no cloud
+  compute, storage, or managed services anywhere in the pipeline. The
+  natural next step, given the FHIR work already done, is a managed
+  healthcare-data cloud service rather than generic infrastructure:
+  - **Google Cloud Healthcare API** — has a native FHIR store; the
+    `RiskAssessment`/`Patient` resources this project already generates
+    could be pushed there directly in place of (or alongside) the public
+    HAPI test sandbox, with IAM-based access control instead of an open
+    test server.
+  - **AWS HealthLake** / **Azure Health Data Services** — the equivalent
+    managed FHIR stores on the other two major clouds, worth comparing
+    against Google's if targeting a specific cloud ecosystem.
 
 ## Project layout
 
